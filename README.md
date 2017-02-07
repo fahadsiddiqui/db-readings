@@ -26,7 +26,6 @@ If you are reading this and taking the effort to understand these papers, we wou
 
 
 ## <a name='essentials'> Essentials of Relational Databases
-
 * [Architecture of a Database System](http://db.cs.berkeley.edu/papers/fntdb07-architecture.pdf) (2007): Joe Hellerstein's great overview of relational database systems. This essay walks readers through all components essential to relational database systems.
 
 * [A Relational Model of Data for Large Shared Data Banks](http://www.cs.berkeley.edu/~rxin/db-papers/Relational-Model-Codd.pdf) (1970): Codd's argument for data independence (from 1970), a fundamental concept in relational databases. Despite the current NoSQL trend, I believe ideas from this paper are becoming increasingly important in massively parallel data systems.
@@ -45,7 +44,6 @@ If you are reading this and taking the effort to understand these papers, we wou
 
 
 ## <a name='system-design'> Classic System Design
-
 * [A History and Evaluation of System R](http://www.cs.ubc.ca/~rap/teaching/504/2010/readings/history-of-system-r.pdf) (1981): There were System R from IBM and Ingres from Berkeley, two systems that showed relational database was feasible. This paper describes System R. It is impressive and scary to note that the internals of relational database systems in 2012 look a lot like System R in 1981.
 
 * [The Google File System](http://research.google.com/archive/gfs.html) (2003) and [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html) (2006): Two core components of Google's data infrastructure. GFS is an append-only distributed file system for large sequential reads (data-intensive applications). BigTable is high-performance distributed data store that builds on GFS. One way to think about it is that GFS is optimized for high throughput, and BigTable explains how to build a low-latency data store on top of GFS. Some of these might have been replaced by newer proprietary technologies internal to Google, but the ideas stand.
@@ -55,9 +53,7 @@ If you are reading this and taking the effort to understand these papers, we wou
 
 
 ## <a name='column'> Columnar Databases
-
 Columnar storage and column-oriented query engine are critical to analytical workloads, e.g. OLAP. It's been almost 15 years since it first came out (the MonetDB paper in 1999), and almost every commercial warehouse database has a columnar engine by now.
-
 * [C-Store: A Column-oriented DBMS](http://www.cs.berkeley.edu/~rxin/db-papers/C-Store.pdf) (2005) and [The Vertica Analytic Database: C-Store 7 Years Later](http://vldb.org/pvldb/vol5/p1790_andrewlamb_vldb2012.pdf) (2012): C-Store is an influential, academic system done by the folks in New England. Vertica is the commercial incarnation of C-Store.
 
 * [Column-Stores vs. Row-Stores: How Different Are They Really?](http://db.csail.mit.edu/projects/cstore/abadi-sigmod08.pdf) (2012): Discusses the importance of both the columnar storage and the query engine.
@@ -66,7 +62,6 @@ Columnar storage and column-oriented query engine are critical to analytical wor
 
 
 ## <a name='data-parallel'> Data-Parallel Computation
-
 * [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html) (2004): MapReduce is both a programming model (borrowed from an old concept in functional programming) and a system at Google for distributed data-intensive computation. The programming model is so simple yet expressive enough to capture a wide range of programming needs. The system, coupled with the model, is fault-tolerant and scalable. It is probably fair to say that half of the academia are now working on problems heavily influenced by MapReduce.
 
 * [Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing](http://www.cs.berkeley.edu/~rxin/db-papers/Spark.pdf) (2012): This is the research paper behind the Spark cluster computing project at Berkeley. Spark exposes a distributed memory abstraction called RDD, which is an immutable collection of records distributed across a cluster's memory. RDDs can be transformed using MapReduce style computations. The RDD abstraction can be orders of magnitude more efficient for workloads that exhibit strong temporal locality, e.g. query processing and iterative machine learning. Spark is an example of why it is important to separate the MapReduce programming model from its execution engine.
@@ -77,7 +72,6 @@ Columnar storage and column-oriented query engine are critical to analytical wor
 
 
 ## <a name='consensus'> Consensus and Consistency
-
 * [Paxos Made Simple](http://research.microsoft.com/en-us/um/people/lamport/pubs/paxos-simple.pdf) (2001): Paxos is a fault-tolerant distributed consensus protocol. It forms the basis of a wide variety of distributed systems. The idea is simple, but notoriously difficult to understand (perhaps due to the way the original Paxos paper was written).
 
 * [The Raft Consensus Algorithm](https://ramcloud.stanford.edu/wiki/download/attachments/11370504/raft.pdf) (2014) : Raft is a consensus algorithm designed as an alternative to Paxos. It was meant to be more understandable than Paxos by means of separation of logic, but it is also formally proven safe and offers some new features.[1] Raft offers a generic way to distribute a state machine across a cluster of computing systems, ensuring that each node in the cluster agrees upon the same series of state transitions. 
@@ -86,23 +80,19 @@ Columnar storage and column-oriented query engine are critical to analytical wor
 
 
 ## <a name='trends'> Trends (Cloud Computing, Warehouse-scale Computing, New Hardware)
-
 * [A View of Cloud Computing](http://www.cs.berkeley.edu/~rxin/db-papers/cloudcomputing.pdf) (2010): This is THE paper on Cloud Computing. This paper discusses the economics and obstacles of cloud computing (referring to the elasticity of resources, not the consumer-facing "cloud") from a technical perspective. The obstacles presented in this paper will impact design decisions for systems running in the cloud.
 
 * [The Datacenter as a Computer: An Introduction to the Design of Warehouse-Scale Machines](http://www.cs.berkeley.edu/~rxin/db-papers/WarehouseScaleComputing.pdf): Google's Luiz André Barroso and Urs Hölzle explains the basics of data center hardware and software for warehouse-scale computing. There is an [accompanying video](http://dl.acm.org/citation.cfm?id=2019527&bnc=1). The video talks about the importance of cutting long-tail latency in massively parallel systems. The other key idea is the disaggregation of resources. Technologies such as GFS/HDFS already disaggregate disks because of high network bandwidth, but yet to see the same trend applying to DRAMs because that'd require low-latency networking.
 
 
 ## <a name='misc'> Miscellaneous
-
 * [Reflections on Trusting Trust](http://www.cs.berkeley.edu/~rxin/db-papers/TrustingTrust-Thompson.pdf) (1984): Ken Thompson's Turing Award acceptance speech in 1984, describing black box backdoor issues and pointing out trust is not absolute.
 
 * [What Goes Around Comes Around](http://people.cs.umass.edu/~yanlei/courses/CS691LL-f06/papers/SH05.pdf): Michael Stonebraker and Joseph M. Hellerstein provide a summary of 35 years of data model proposals, grouped into 9 different eras. The paper discusses the proposals of each era, and show that there are only a few basic data modeling ideas, and most have been around a long time. Later proposals inevitably bear a strong resemblance to certain earlier proposals.
 
 
 ## <a name='external'> External Reading Lists
-
 A number of schools have their own reading lists for graduate students in databases.
-
 * Berkeley [PhD prelim exam reading list](http://www.eecs.berkeley.edu/GradAffairs/CS/Prelims/db.html) and [CS286 grad database class reading list](http://www.cs286.net/home/reading-list)
 * [Brown CSCI 2270 Advanced Topics in Database Management](http://www.cs.brown.edu/courses/cs227/papers.html)
 * [Stanford PhD qualifying exam](http://infolab.stanford.edu/db_pages/infoqual.html)
